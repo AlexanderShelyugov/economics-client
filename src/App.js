@@ -1,10 +1,10 @@
 import React from 'react'
-import Warehouses from './components/Warehouses'
+import WarehousesTable from './containers/Warehouses'
 
 function App() {
   return (
     <div>
-      <Warehouses/>
+      <WarehousesTable />
     </div>
   )
 }
