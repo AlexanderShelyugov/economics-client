@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-    Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 } from '@material-ui/core'
 
-const Warehouses = ({ value, onRefreshClick }) => {
+const WarehousesTable = ({ value }) => {
     return (
         <div>
             <h1 className="content">Warehouses are here!</h1>
-            <Button variant="contained" color="primary" onClick={onRefreshClick} >Refresh</Button>
             <TableContainer>
                 <Table stickyHeader aria-label="Warehouses">
                     <TableHead>
@@ -21,7 +20,7 @@ const Warehouses = ({ value, onRefreshClick }) => {
                     <TableBody>
                         {
                             value.map((w) => (
-                                <TableRow key={w.name}>
+                                <TableRow key={w.id}>
                                     <TableCell>{w.name}</TableCell>
                                     <TableCell>{w.latitude}</TableCell>
                                     <TableCell>{w.longitude}</TableCell>
@@ -35,15 +34,14 @@ const Warehouses = ({ value, onRefreshClick }) => {
     )
 }
 
-Warehouses.propTypes = {
+WarehousesTable.propTypes = {
     value: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,
             latitude: PropTypes.number.isRequired,
             longitude: PropTypes.number.isRequired
         })
-    ).isRequired,
-    onRefreshClick: PropTypes.func
+    ).isRequired
 }
 
-export default Warehouses
+export default WarehousesTable

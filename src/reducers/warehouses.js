@@ -1,33 +1,37 @@
-import { WarehousesActions } from '../actions/warehouses'
-import { combineReducers } from 'redux'
+import { LOAD_WAREHOUSES, LOAD_WAREHOUSES_SUCCESS, LOAD_WAREHOUSES_ERROR } from '../actions/warehouses'
 
-const itemsReducer = (state = [], action) => {
-    console.log(`Got action ${action}`)
+function warehousesLoadingReducer(
+    state = {
+        isFetching: false,
+        didInvalidate: false,
+        message: null,
+        items: []
+    },
+    action
+) {
     switch (action.type) {
-        case WarehousesActions.LOAD_WAREHOUSES:
-            return [
-                ...state,
-                {
-                    name: "Warehouse 1 from items reducer",
-                    latitude: 100,
-                    longitude: 500
-                },
-                {
-                    name: "Warehouse 2 from items reducer",
-                    latitude: 200,
-                    longitude: 400
-                },
-                {
-                    name: "Warehouse 3 from items reducer",
-                    latitude: 300,
-                    longitude: 300
-                }
-            ]
-        default:
-            return state
+        case LOAD_WAREHOUSES:
+            return Object.assign({}, state, {
+                isFetching: true,
+                didInvalidate: false,
+                message: 'Loading...'
+            })
+        case LOAD_WAREHOUSES_SUCCESS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                didInvalidate: true,
+                message: null,
+                items: action.warehouses
+            })
+        case LOAD_WAREHOUSES_ERROR:
+            return Object.assign({}, state, {
+                isFetching: false,
+                didInvalidate: true,
+                message: action.message,
+                items: []
+            })
+        default: return state
     }
 }
 
-export default combineReducers({
-    items: itemsReducer
-})
+export default warehousesLoadingReducer

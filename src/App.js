@@ -1,12 +1,12 @@
 import React from 'react'
-import WarehousesTable from './containers/Warehouses'
+import Warehouses from './containers/Warehouses'
 
 function App() {
   return (
     <div>
-      <WarehousesTable />
+      <Warehouses />
     </div>
   )
 }
 
-export default App;
+export default App
