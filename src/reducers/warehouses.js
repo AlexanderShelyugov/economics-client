@@ -1,22 +1,24 @@
 import { WarehousesActions } from '../actions/warehouses'
+import { combineReducers } from 'redux'
 
-export default (state = [], action) => {
+const itemsReducer = (state = [], action) => {
+    console.log(`Got action ${action}`)
     switch (action.type) {
         case WarehousesActions.LOAD_WAREHOUSES:
             return [
                 ...state,
                 {
-                    name: "Warehouse 1",
+                    name: "Warehouse 1 from items reducer",
                     latitude: 100,
                     longitude: 500
                 },
                 {
-                    name: "Warehouse 2",
+                    name: "Warehouse 2 from items reducer",
                     latitude: 200,
                     longitude: 400
                 },
                 {
-                    name: "Warehouse 3",
+                    name: "Warehouse 3 from items reducer",
                     latitude: 300,
                     longitude: 300
                 }
@@ -25,3 +27,7 @@ export default (state = [], action) => {
             return state
     }
 }
+
+export default combineReducers({
+    items: itemsReducer
+})
