@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import '@testing-library/jest-dom/extend-expect'
 
-import Warehouses from '../components/warehouses'
+import Warehouses from '../components/Warehouses'
 
 test('Warehouses component is correct', () => {
     const container = document.createElement('div')

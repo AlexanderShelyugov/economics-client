@@ -1,5 +1,5 @@
 import React from 'react'
-import Warehouses from './components/warehouses'
+import Warehouses from './components/Warehouses'
 
 function App() {
   return (
