@@ -6,23 +6,7 @@ import rootReducer from '../reducers'
 
 const initialState = {
     warehouses: {
-        items: [
-            {
-                name: "Warehouse 1",
-                latitude: 100,
-                longitude: 500
-            },
-            {
-                name: "Warehouse 2",
-                latitude: 200,
-                longitude: 400
-            },
-            {
-                name: "Warehouse 3",
-                latitude: 300,
-                longitude: 300
-            }
-        ]
+        items: []
     }
 }
 
