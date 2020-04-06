@@ -5,8 +5,18 @@ import { createLogger } from 'redux-logger'
 import rootReducer from '../reducers'
 
 const initialState = {
-    warehouses: {
-        items: []
+    entities: {
+        warehouses: {
+            byId: {},
+            allIds: []
+        }
+    },
+    clientArea: {
+        warehouses: {
+            isFetching: false,
+            invalidating: false,
+            message: null
+        }
     }
 }
 

@@ -1,37 +1,62 @@
-import { LOAD_WAREHOUSES, LOAD_WAREHOUSES_SUCCESS, LOAD_WAREHOUSES_ERROR } from '../actions/warehouses'
+import { normalize, schema } from 'normalizr'
 
-function warehousesLoadingReducer(
+import { INVALIDATE_WAREHOUSES, LOAD_WAREHOUSES, LOAD_WAREHOUSES_SUCCESS, LOAD_WAREHOUSES_ERROR } from '../actions/warehouses'
+
+const WarehouseSchema = [new schema.Entity('warehouses')]
+
+export function warehouseEntityReducer(
     state = {
-        isFetching: false,
-        didInvalidate: false,
-        message: null,
-        items: []
+        byId: {},
+        allIds: []
     },
     action
 ) {
     switch (action.type) {
-        case LOAD_WAREHOUSES:
-            return Object.assign({}, state, {
-                isFetching: true,
-                didInvalidate: false,
-                message: 'Loading...'
-            })
         case LOAD_WAREHOUSES_SUCCESS:
+            const normalizedJson = normalize(action.warehouses, WarehouseSchema)
             return Object.assign({}, state, {
-                isFetching: false,
-                didInvalidate: true,
-                message: null,
-                items: action.warehouses
+                byId: normalizedJson.entities.warehouses,
+                allIds: normalizedJson.result
             })
         case LOAD_WAREHOUSES_ERROR:
             return Object.assign({}, state, {
-                isFetching: false,
-                didInvalidate: true,
-                message: action.message,
-                items: []
+                byId: {},
+                allIds: []
             })
         default: return state
     }
 }
 
-export default warehousesLoadingReducer
+export function warehouseClientReducer(
+    state = {
+        isFetching: false,
+        invalidating: false,
+        message: null
+    },
+    action) {
+    switch (action.type) {
+        case INVALIDATE_WAREHOUSES:
+            return Object.assign({}, state, {
+                invalidating: true
+            })
+        case LOAD_WAREHOUSES:
+            return Object.assign({}, state, {
+                isFetching: true,
+                invalidating: false,
+                message: 'Loading...'
+            })
+        case LOAD_WAREHOUSES_SUCCESS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                invalidating: false,
+                message: null
+            })
+        case LOAD_WAREHOUSES_ERROR:
+            return Object.assign({}, state, {
+                isFetching: false,
+                invalidating: false,
+                message: action.message
+            })
+        default: return state
+    }
+}

@@ -1,6 +1,15 @@
 import { combineReducers } from 'redux'
-import warehouseReducer from './warehouses'
+import { warehouseClientReducer, warehouseEntityReducer } from './warehouses'
+
+const entitiesReducer = combineReducers({
+    warehouses: warehouseEntityReducer
+})
+
+const clientAreaReducer = combineReducers({
+    warehouses: warehouseClientReducer
+})
 
 export default combineReducers({
-    warehouses: warehouseReducer
+    entities: entitiesReducer,
+    clientArea: clientAreaReducer
 })

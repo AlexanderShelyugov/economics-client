@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
@@ -19,13 +20,13 @@ const WarehousesTable = ({ value }) => {
                     </TableHead>
                     <TableBody>
                         {
-                            value.map((w) => (
+                            _.map(value, (w) =>
                                 <TableRow key={w.id}>
                                     <TableCell>{w.name}</TableCell>
                                     <TableCell>{w.latitude}</TableCell>
                                     <TableCell>{w.longitude}</TableCell>
                                 </TableRow>
-                            ))
+                            )
                         }
                     </TableBody>
                 </Table>

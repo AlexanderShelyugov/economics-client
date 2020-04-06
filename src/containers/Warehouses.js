@@ -1,8 +1,9 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button } from '@material-ui/core'
 
-import { fetchWarehousesIfNeeded } from '../actions/warehouses'
+import { invalidateWarehouses, getWarehouses } from '../actions/warehouses'
 import WarehousesTable from '../components/Warehouses'
 
 class Warehouses extends Component {
@@ -14,23 +15,27 @@ class Warehouses extends Component {
     handleRefreshClick = e => {
         e.preventDefault()
         const { dispatch } = this.props
-        dispatch(fetchWarehousesIfNeeded())
+        dispatch(invalidateWarehouses())
+        dispatch(getWarehouses())
     }
 
     componentDidMount() {
         const { dispatch } = this.props
-        dispatch(fetchWarehousesIfNeeded())
+        dispatch(getWarehouses())
     }
 
     render() {
         const { value, message } = this.props
-        const isEmpty = value.length === 0
         return (
             <div>
-                <Button variant="contained" color="primary" onClick={this.handleRefreshClick} >Refresh</Button>
                 {
-                    isEmpty
-                        ? (message != null ? <h2>{message}</h2> : <h2>No warehouses</h2>)
+                    message == null
+                        ? <Button variant="contained" color="primary" onClick={this.handleRefreshClick} >Refresh</Button>
+                        : <h2>{message}</h2>
+                }
+                {
+                    _.isEmpty(value)
+                        ? <h2>No warehouses</h2>
                         : <div>
                             <WarehousesTable value={value} />
                         </div>
@@ -41,9 +46,9 @@ class Warehouses extends Component {
 }
 
 const mapStateToProps = state => ({
-    isFetching: state.warehouses.isFetching,
-    value: state.warehouses.items,
-    message: state.warehouses.message
+    isFetching: state.clientArea.warehouses.isFetching,
+    value: state.entities.warehouses.byId,
+    message: state.clientArea.warehouses.message
 })
 
 export default connect(mapStateToProps)(Warehouses)
