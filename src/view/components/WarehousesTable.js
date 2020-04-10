@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography
 } from '@material-ui/core'
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -10,7 +10,7 @@ import { warehouseShape } from '../propTypes'
 const WarehousesTable = ({ value }) => {
     return (
         <div>
-            <h1 className="content">Warehouses are here!</h1>
+            <Typography variant="h4"><p className="content">Warehouses are here!</p></Typography>
             <TableContainer>
                 <Table stickyHeader aria-label="Warehouses">
                     <TableHead>

@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
@@ -34,7 +34,7 @@ class Warehouses extends Component {
                 {
                     message == null
                         ? null
-                        : <h2>{message}</h2>
+                        : <Typography variant="h4">{message}</Typography>
                 }
                 {
                     _.isEmpty(value)
