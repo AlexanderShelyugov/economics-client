@@ -1,0 +1,1 @@
+export { default as warehouse } from './warehouse'

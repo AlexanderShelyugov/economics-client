@@ -6,7 +6,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import 'typeface-roboto'
 
 import App from './App'
-import { configureStore } from './store'
+import configureStore from './state/store'
 
 const store = configureStore()
 

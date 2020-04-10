@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button } from '@material-ui/core'
 
-import { invalidateWarehouses, getWarehouses } from '../actions/warehouses'
+import { warehouseOperations as operations } from '../state/ducks/warehouse'
 import WarehousesTable from '../components/Warehouses'
 
 class Warehouses extends Component {
@@ -15,22 +15,23 @@ class Warehouses extends Component {
     handleRefreshClick = e => {
         e.preventDefault()
         const { dispatch } = this.props
-        dispatch(invalidateWarehouses())
-        dispatch(getWarehouses())
+        dispatch(operations.invalidateWarehouses())
+        dispatch(operations.getWarehouses())
     }
 
     componentDidMount() {
         const { dispatch } = this.props
-        dispatch(getWarehouses())
+        dispatch(operations.getWarehouses())
     }
 
     render() {
         const { value, message } = this.props
         return (
             <div>
+                <Button variant="contained" color="primary" onClick={this.handleRefreshClick} >Refresh</Button>
                 {
                     message == null
-                        ? <Button variant="contained" color="primary" onClick={this.handleRefreshClick} >Refresh</Button>
+                        ? null
                         : <h2>{message}</h2>
                 }
                 {
@@ -46,9 +47,9 @@ class Warehouses extends Component {
 }
 
 const mapStateToProps = state => ({
-    isFetching: state.clientArea.warehouses.isFetching,
-    value: state.entities.warehouses.byId,
-    message: state.clientArea.warehouses.message
+    isFetching: state.warehouse.meta.isFetching,
+    value: state.warehouse.entities.byId,
+    message: state.warehouse.meta.message
 })
 
 export default connect(mapStateToProps)(Warehouses)

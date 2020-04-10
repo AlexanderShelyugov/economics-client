@@ -1,10 +1,11 @@
 import { normalize, schema } from 'normalizr'
+import { combineReducers } from 'redux'
 
-import { INVALIDATE_WAREHOUSES, LOAD_WAREHOUSES, LOAD_WAREHOUSES_SUCCESS, LOAD_WAREHOUSES_ERROR } from '../actions/warehouses'
+import * as types from './types'
 
 const WarehouseSchema = [new schema.Entity('warehouses')]
 
-export function warehouseEntityReducer(
+function entityReducer(
     state = {
         byId: {},
         allIds: []
@@ -12,13 +13,13 @@ export function warehouseEntityReducer(
     action
 ) {
     switch (action.type) {
-        case LOAD_WAREHOUSES_SUCCESS:
+        case types.RECEIVE:
             const normalizedJson = normalize(action.warehouses, WarehouseSchema)
             return Object.assign({}, state, {
                 byId: normalizedJson.entities.warehouses,
                 allIds: normalizedJson.result
             })
-        case LOAD_WAREHOUSES_ERROR:
+        case types.RECEIVE_ERROR:
             return Object.assign({}, state, {
                 byId: {},
                 allIds: []
@@ -27,31 +28,32 @@ export function warehouseEntityReducer(
     }
 }
 
-export function warehouseClientReducer(
+function metaReducer(
     state = {
         isFetching: false,
         invalidating: false,
         message: null
     },
-    action) {
+    action
+) {
     switch (action.type) {
-        case INVALIDATE_WAREHOUSES:
+        case types.INVALIDATE:
             return Object.assign({}, state, {
                 invalidating: true
             })
-        case LOAD_WAREHOUSES:
+        case types.REQUEST:
             return Object.assign({}, state, {
                 isFetching: true,
                 invalidating: false,
                 message: 'Loading...'
             })
-        case LOAD_WAREHOUSES_SUCCESS:
+        case types.RECEIVE:
             return Object.assign({}, state, {
                 isFetching: false,
                 invalidating: false,
                 message: null
             })
-        case LOAD_WAREHOUSES_ERROR:
+        case types.RECEIVE_ERROR:
             return Object.assign({}, state, {
                 isFetching: false,
                 invalidating: false,
@@ -60,3 +62,8 @@ export function warehouseClientReducer(
         default: return state
     }
 }
+
+export default combineReducers({
+    entities: entityReducer,
+    meta: metaReducer
+})
