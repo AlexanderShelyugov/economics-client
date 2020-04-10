@@ -1,9 +1,11 @@
 import _ from 'lodash'
-import React from 'react'
-import PropTypes from 'prop-types'
 import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 } from '@material-ui/core'
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import { warehouseShape } from '../propTypes'
 
 const WarehousesTable = ({ value }) => {
     return (
@@ -36,12 +38,8 @@ const WarehousesTable = ({ value }) => {
 }
 
 WarehousesTable.propTypes = {
-    value: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            latitude: PropTypes.number.isRequired,
-            longitude: PropTypes.number.isRequired
-        })
+    value: PropTypes.objectOf(
+        warehouseShape.isRequired
     ).isRequired
 }
 

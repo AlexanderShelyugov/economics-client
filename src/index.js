@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
 import 'typeface-roboto'
 
-import App from './App'
+import App from './view/App'
 import configureStore from './state/store'
 
 const store = configureStore()

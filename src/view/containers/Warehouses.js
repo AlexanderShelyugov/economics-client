@@ -1,10 +1,12 @@
+import { Button } from '@material-ui/core'
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
-import { warehouseOperations as operations } from '../state/ducks/warehouse'
-import WarehousesTable from '../components/Warehouses'
+import WarehousesTable from '../components/WarehousesTable'
+import { warehouseShape } from '../propTypes'
+import { warehouseOperations as operations } from '../../state/ducks/warehouse'
 
 class Warehouses extends Component {
     constructor(props) {
@@ -44,6 +46,12 @@ class Warehouses extends Component {
             </div>
         )
     }
+}
+
+Warehouses.propTypes = {
+    value: PropTypes.objectOf(
+        warehouseShape.isRequired
+    ).isRequired
 }
 
 const mapStateToProps = state => ({
