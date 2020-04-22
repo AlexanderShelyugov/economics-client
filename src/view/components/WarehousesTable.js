@@ -18,6 +18,7 @@ const WarehousesTable = ({ value }) => {
                             <TableCell>Name</TableCell>
                             <TableCell>Latitude</TableCell>
                             <TableCell>Longitude</TableCell>
+                            <TableCell>Capacity</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -27,6 +28,7 @@ const WarehousesTable = ({ value }) => {
                                     <TableCell>{w.name}</TableCell>
                                     <TableCell>{w.latitude}</TableCell>
                                     <TableCell>{w.longitude}</TableCell>
+                                    <TableCell>{w.capacity}</TableCell>
                                 </TableRow>
                             )
                         }
