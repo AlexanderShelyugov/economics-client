@@ -44,7 +44,10 @@ class WarehousesTable extends Component {
                             {
                                 _.map(value, (w) => {
                                     const id = w.id
-                                    const onClick = (e) => this.handleClick(id)
+                                    const onClick = (e) => {
+                                        e.preventDefault()
+                                        this.handleClick(id)
+                                    }
                                     return (
                                         <TableRow key={id}
                                             hover
