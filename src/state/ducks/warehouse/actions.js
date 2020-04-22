@@ -33,7 +33,7 @@ function shouldFetchWarehouses(state) {
 function fetchWarehouses() {
     return dispatch => {
         dispatch(requestWarehouses())
-        return fetch('http://localhost:8080/warehouses/')
+        return fetch('http://localhost:8001/warehouses/')
             .then(response => response.json())
             .then(
                 json => dispatch(receiveWarehouses(json)),

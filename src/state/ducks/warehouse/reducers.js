@@ -1,3 +1,4 @@
+import produce from 'immer'
 import { normalize, schema } from 'normalizr'
 import { combineReducers } from 'redux'
 
@@ -5,63 +6,71 @@ import * as types from './types'
 
 const WarehouseSchema = [new schema.Entity('warehouses')]
 
-function entityReducer(
+const entityReducer = (
     state = {
         byId: {},
         allIds: []
     },
     action
-) {
+) => produce(state, draft => {
     switch (action.type) {
         case types.RECEIVE:
             const normalizedJson = normalize(action.warehouses, WarehouseSchema)
-            return Object.assign({}, state, {
+            Object.assign(draft, {
                 byId: normalizedJson.entities.warehouses,
                 allIds: normalizedJson.result
             })
+            break
         case types.RECEIVE_ERROR:
-            return Object.assign({}, state, {
+            Object.assign(draft, {
                 byId: {},
                 allIds: []
             })
-        default: return state
+            break
+        default:
+            break
     }
-}
+})
 
-function metaReducer(
+const metaReducer = (
     state = {
         isFetching: false,
         invalidating: false,
         message: null
     },
     action
-) {
+) => produce(state, draft => {
     switch (action.type) {
         case types.INVALIDATE:
-            return Object.assign({}, state, {
+            Object.assign(draft, {
                 invalidating: true
             })
+            break
         case types.REQUEST:
-            return Object.assign({}, state, {
+            Object.assign(draft, {
                 isFetching: true,
                 invalidating: false,
                 message: 'Loading...'
             })
+            break
         case types.RECEIVE:
-            return Object.assign({}, state, {
+            Object.assign(draft, {
                 isFetching: false,
                 invalidating: false,
                 message: null
             })
+            break
         case types.RECEIVE_ERROR:
-            return Object.assign({}, state, {
+            Object.assign(draft, {
                 isFetching: false,
                 invalidating: false,
                 message: action.message
             })
-        default: return state
+            break
+        default:
+            break
     }
-}
+})
 
 export default combineReducers({
     entities: entityReducer,
