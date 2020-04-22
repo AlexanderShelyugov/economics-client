@@ -5,16 +5,25 @@ import thunk from 'redux-thunk'
 
 import * as reducers from './ducks'
 
-export default function configureStore(initialState = {}) {
+let store
+
+function configureStore(initialState = {}) {
     enableMapSet()
     const rootReducer = combineReducers(reducers)
     const middleware = [thunk]
     if (process.env.NODE_ENV !== 'production') {
         middleware.push(createLogger())
     }
-    return createStore(
+    store = createStore(
         rootReducer,
         initialState,
         applyMiddleware(...middleware)
     )
+    return store
 }
+
+export function getStore() {
+    return store
+}
+
+export default configureStore

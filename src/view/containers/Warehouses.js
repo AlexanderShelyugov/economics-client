@@ -5,13 +5,17 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import WarehousesTable from '../components/WarehousesTable'
+import WarehouseSummary from '../components/WarehouseSummary'
 import { warehouseShape } from '../propTypes'
-import { warehouseOperations as operations } from '../../state/ducks/warehouse'
+import { warehouseOperations as operations, warehouseSelectors as selectors } from '../../state/ducks/warehouse'
+
 
 class Warehouses extends Component {
     constructor(props) {
         super(props)
+        this.state = {}
         this.handleRefreshClick = this.handleRefreshClick.bind(this)
+        this.handleWarehouseClick = this.handleWarehouseClick.bind(this)
     }
 
     handleRefreshClick = e => {
@@ -21,6 +25,12 @@ class Warehouses extends Component {
         dispatch(operations.getWarehouses())
     }
 
+    handleWarehouseClick = id => {
+        this.setState({
+            selectedWarehouse: selectors.getById(id)
+        })
+    }
+
     componentDidMount() {
         const { dispatch } = this.props
         dispatch(operations.getWarehouses())
@@ -28,6 +38,7 @@ class Warehouses extends Component {
 
     render() {
         const { value, message } = this.props
+        const { selectedWarehouse } = this.state
         return (
             <div>
                 <Button variant="contained" color="primary" onClick={this.handleRefreshClick} >Refresh</Button>
@@ -40,7 +51,11 @@ class Warehouses extends Component {
                     _.isEmpty(value)
                         ? <h2>No warehouses</h2>
                         : <div>
-                            <WarehousesTable value={value} />
+                            <WarehousesTable
+                                value={value}
+                                onClick={this.handleWarehouseClick}
+                            />
+                            <WarehouseSummary value={selectedWarehouse} />
                         </div>
                 }
             </div>
