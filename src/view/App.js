@@ -3,14 +3,14 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import React from 'react'
 import 'typeface-roboto'
 
-import Warehouses from './containers/Warehouses'
+import EconomicsMainPage from './containers/EconomicsMainPage'
 import theme from './theme'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Warehouses />
+      <EconomicsMainPage />
     </ThemeProvider>
   )
 }

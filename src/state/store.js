@@ -23,7 +23,10 @@ function configureStore(initialState = {}) {
 }
 
 export function getStore() {
-    return store
+    if (store == null) {
+        return null
+    }
+    return store.getState()
 }
 
 export default configureStore

@@ -1,9 +1,9 @@
 import { getStore } from '../../store'
 
 export function getById(id) {
-    if (id == null || getStore() == null) {
+    const state = getStore() 
+    if (id == null || state == null) {
         return null
     }
-    const state = getStore().getState()
     return state.warehouse.entities.byId[id]
 }
