@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { Button, Container, Drawer, IconButton, Typography } from '@material-ui/core'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import CloseIcon from '@material-ui/icons/Close'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
@@ -28,16 +28,28 @@ class EconomicsMainPage extends Component {
         dispatch(operations.getWarehouses())
     }
 
+    setOpen(isOpen) {
+        this.setState(() => ({ isOpen }))
+    }
+
+    getOpen() {
+        return this.state.isOpen
+    }
+
     handleWarehouseClick = id => {
+        if (_.get(this.state, "selectedWarehouse.id") === id) {
+            this.setOpen(!this.getOpen())
+            return
+        }
         this.setState({
-            isOpen: true,
             selectedWarehouse: selectors.getById(id)
         })
+        this.setOpen(true)
     }
 
     handleDrawerClose = e => {
         e.preventDefault()
-        this.setState({ isOpen: false })
+        this.setOpen(false)
     }
 
     render() {
@@ -67,7 +79,7 @@ class EconomicsMainPage extends Component {
                                     open={isOpen}>
                                     <div>
                                         <IconButton onClick={this.handleDrawerClose}>
-                                            <ChevronRightIcon />
+                                            <CloseIcon />
                                         </IconButton>
                                     </div>
                                     <Container>
