@@ -8,6 +8,14 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import StoreIcon from '@material-ui/icons/Store'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import React from 'react'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom"
+
+import WarehousesPage from './WarehousesPage'
 
 const menuWidth = 240
 
@@ -16,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexGrow: 1,
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
     title: {
         flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
     },
     drawer: {
         width: menuWidth,
@@ -39,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 export default function EconomicsMainPage() {
     const classes = useStyles()
     const theme = useTheme()
@@ -54,67 +61,83 @@ export default function EconomicsMainPage() {
     };
 
     return (
-        <div className="{classes.root}">
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        edge="start"
-                        className="{classes.menuButton}"
-                        color="inherit"
-                        aria-label="menu"
-                        onClick={handleMenuOpen}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" className="{classes.title}">
-                        Economics
+        <Router>
+            <div className="{classes.root}">
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            edge="start"
+                            className="{classes.menuButton}"
+                            color="inherit"
+                            aria-label="menu"
+                            onClick={handleMenuOpen}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" className="{classes.title}">
+                            Economics
                     </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={open}
-                classes={{
-                    paper: classes.drawerPaper
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleMenuClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    <ListItem
-                        button
-                        key={1}
-                        component="a"
-                        href="/"
+                    </Toolbar>
+                </AppBar>
+                <aside>
+                    <Drawer
+                        className={classes.drawer}
+                        variant="persistent"
+                        anchor="left"
+                        open={open}
+                        classes={{
+                            paper: classes.drawerPaper
+                        }}
                     >
-                        <ListItemIcon><HomeIcon /></ListItemIcon>
-                        <ListItemText primary="Home" />
-                    </ListItem>
-                    <ListItem
-                        button
-                        key={2}
-                        component="a"
-                        href="/warehouses"
-                    >
-                        <ListItemIcon><StoreIcon /></ListItemIcon>
-                        <ListItemText primary="Warehouses" />
-                    </ListItem>
-                    <ListItem
-                        button
-                        key={3}
-                        component="a"
-                        href="/products"
-                    >
-                        <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
-                        <ListItemText primary="Products" />
-                    </ListItem>
-                </List>
-            </Drawer>
-        </div>
+                        <div className={classes.drawerHeader}>
+                            <IconButton onClick={handleMenuClose}>
+                                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                            </IconButton>
+                        </div>
+                        <Divider />
+                        <List>
+                            <ListItem
+                                button
+                                key={1}
+                                component={Link}
+                                to="/"
+                            >
+                                <ListItemIcon><HomeIcon /></ListItemIcon>
+                                <ListItemText primary="Home" />
+                            </ListItem>
+                            <ListItem
+                                button
+                                key={2}
+                                component={Link}
+                                to="/warehouses"
+                            >
+                                <ListItemIcon><StoreIcon /></ListItemIcon>
+                                <ListItemText primary="Warehouses" />
+                            </ListItem>
+                            <ListItem
+                                button
+                                key={3}
+                                component={Link}
+                                to="/products"
+                            >
+                                <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
+                                <ListItemText primary="Products" />
+                            </ListItem>
+                        </List>
+                    </Drawer>
+                </aside>
+
+                <main>
+                    <Switch>
+                        <Route path="/warehouses">
+                            <WarehousesPage />
+                        </Route>
+                        <Route path="/products">
+
+                        </Route>
+                        <Route path="/"></Route>
+                    </Switch>
+                </main>
+            </div>
+        </Router>
     )
 }
