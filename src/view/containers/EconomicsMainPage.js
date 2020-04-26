@@ -15,6 +15,7 @@ import {
     Link
 } from "react-router-dom"
 
+import ProductsPage from './ProductsPage'
 import WarehousesPage from './WarehousesPage'
 
 const menuWidth = 240
@@ -132,7 +133,7 @@ export default function EconomicsMainPage() {
                             <WarehousesPage />
                         </Route>
                         <Route path="/products">
-
+                            <ProductsPage />
                         </Route>
                         <Route path="/"></Route>
                     </Switch>

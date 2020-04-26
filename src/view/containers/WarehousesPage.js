@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import WarehouseSummary from '../components/WarehouseSummary'
 import WarehousesTable from './WarehousesTable'
 import { warehouseOperations as operations, warehouseSelectors as selectors } from '../../state/ducks/warehouse'
-import { productOperations } from '../../state/ducks/product'
 
 class WarehousesPage extends Component {
     constructor(props) {
@@ -20,7 +19,6 @@ class WarehousesPage extends Component {
     componentDidMount() {
         const { dispatch } = this.props
         dispatch(operations.getWarehouses())
-        dispatch(productOperations.getProducts())
     }
 
     handleRefreshClick = e => {
