@@ -54,11 +54,11 @@ export default function EconomicsMainPage() {
     const [open, setOpen] = React.useState(false)
 
     const handleMenuOpen = () => {
-        setOpen(true);
+        setOpen(true)
     };
 
     const handleMenuClose = () => {
-        setOpen(false);
+        setOpen(false)
     };
 
     return (
@@ -100,6 +100,7 @@ export default function EconomicsMainPage() {
                                 button
                                 key={1}
                                 component={Link}
+                                onClick={handleMenuClose}
                                 to="/"
                             >
                                 <ListItemIcon><HomeIcon /></ListItemIcon>
@@ -109,6 +110,7 @@ export default function EconomicsMainPage() {
                                 button
                                 key={2}
                                 component={Link}
+                                onClick={handleMenuClose}
                                 to="/warehouses"
                             >
                                 <ListItemIcon><StoreIcon /></ListItemIcon>
@@ -118,6 +120,7 @@ export default function EconomicsMainPage() {
                                 button
                                 key={3}
                                 component={Link}
+                                onClick={handleMenuClose}
                                 to="/products"
                             >
                                 <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
