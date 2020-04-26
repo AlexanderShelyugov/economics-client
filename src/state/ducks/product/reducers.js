@@ -4,26 +4,31 @@ import { combineReducers } from 'redux'
 
 import * as types from './types'
 
-const ProductSchema = [new schema.Entity('products')]
+const ProductSchema = [new schema.Entity('products', {
+    type: new schema.Entity('productTypes')
+})]
 
 const entityReducer = (
     state = {
         byId: {},
+        typesById: {},
         allIds: []
     },
     action
 ) => produce(state, draft => {
     switch (action.type) {
         case types.RECEIVE:
-            const normalizedJson = normalize(action.warehouses, ProductSchema)
+            const normalizedJson = normalize(action.products, ProductSchema)
             Object.assign(draft, {
                 byId: normalizedJson.entities.products,
+                typesById: normalizedJson.entities.productTypes,
                 allIds: normalizedJson.result
             })
             break
         case types.RECEIVE_ERROR:
             Object.assign(draft, {
                 byId: {},
+                typesById: {},
                 allIds: []
             })
             break

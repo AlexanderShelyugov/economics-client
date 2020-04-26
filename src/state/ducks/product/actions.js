@@ -33,7 +33,7 @@ function shouldFetchProducts(state) {
 function fetchProducts() {
     return dispatch => {
         dispatch(requestProducts())
-        return fetch('http://localhost:8100/products/')
+        return fetch('http://localhost:8100/products')
             .then(response => response.json())
             .then(
                 json => dispatch(receiveProducts(json)),
