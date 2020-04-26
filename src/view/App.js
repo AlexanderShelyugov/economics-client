@@ -3,7 +3,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import React from 'react'
 import 'typeface-roboto'
 
-import EconomicsMainPage from './containers/EconomicsMainPage'
+import EconomicsMainPage from './pages/EconomicsMainPage'
 import theme from './theme'
 
 function App() {

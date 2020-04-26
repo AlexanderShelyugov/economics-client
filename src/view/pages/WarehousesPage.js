@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import WarehouseSummary from '../components/WarehouseSummary'
-import WarehousesTable from './WarehousesTable'
+import WarehousesTable from '../containers/WarehousesTable'
 import { warehouseOperations as operations, warehouseSelectors as selectors } from '../../state/ducks/warehouse'
 
 class WarehousesPage extends Component {
