@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
     },
-}));
+}))
 
 export default function EconomicsMainPage() {
     const classes = useStyles()
@@ -55,11 +55,11 @@ export default function EconomicsMainPage() {
 
     const handleMenuOpen = () => {
         setOpen(true)
-    };
+    }
 
     const handleMenuClose = () => {
         setOpen(false)
-    };
+    }
 
     return (
         <Router>
