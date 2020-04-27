@@ -26,11 +26,11 @@ yarn run build
 
 ### Docker
 You have two options to build a Docker image.
-* If you have built a project according to , you can just run 
+* If you have built a project according to [the previous step](#Project), you can just run 
 ```
 docker build -f Dockerfile.lite -t economics:client
 ```
-* Or if you don't want to setup node, build etc. you can just create a production build using
+* Or if you don't want to setup **node**, build etc. you can just create a production build using
 ```
 build.sh
 ```
