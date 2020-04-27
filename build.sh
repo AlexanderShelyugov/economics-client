@@ -1,1 +1,1 @@
-docker build . -f Dockerfile.production -t economics:client
+docker build . -t economics:client

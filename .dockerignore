@@ -1,4 +1,9 @@
-!public
-!src
-!.env.local
-!package.json
+build/
+node_modules/
+.gitignore
+build.sh
+Dockerfile
+Dockerfile.lite
+README.md
+run.sh
+yarn.lock
