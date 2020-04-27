@@ -6,8 +6,8 @@ You can build and run it locally or use the complete setup using [economics-ci](
 
 # Table of contents
 1. [Build](#Build)
-1.1. [Project](#Project)
-1.2. [Docker](#Docker)
+    1. [Project](#Project)
+    2. [Docker](#Docker)
 2. [Run](#Run)
 3. [Libraries](#Libraries)
 
