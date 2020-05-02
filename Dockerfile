@@ -1,7 +1,8 @@
 FROM node:12.16.2-alpine3.9 AS build
 WORKDIR /app
-ADD . ./
+COPY package.json ./
 RUN yarn
+ADD . ./
 RUN yarn run build
 
 FROM nginx:1.18.0-alpine

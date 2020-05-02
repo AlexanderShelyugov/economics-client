@@ -1,5 +1,6 @@
 import _ from 'lodash'
 
+import { productsUrl } from '../../config'
 import * as types from './types'
 
 export const invalidateProducts = () => ({
@@ -33,7 +34,7 @@ function shouldFetchProducts(state) {
 function fetchProducts() {
     return dispatch => {
         dispatch(requestProducts())
-        return fetch('http://localhost:8100/products')
+        return fetch(productsUrl + '/products')
             .then(response => response.json())
             .then(
                 json => dispatch(receiveProducts(json)),
