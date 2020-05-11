@@ -1,23 +1,26 @@
 export const randomString = () => Math.random().toString(36).substring(7)
 
+const randomNumber = (span, min = 0) => Math.ceil(Math.random() * span - min)
+const randomId = () => randomNumber(5000).toString()
+
 export const randomWarehouse = () => ({
-    id: Math.ceil(Math.random() * (5000)).toString(),
+    id: randomId(),
     name: randomString(),
-    latitude: Math.ceil(Math.random() * 360 - 180),
-    longitude: Math.ceil(Math.random() * 180 - 90),
-    capacity: Math.ceil(Math.random() * 200)
+    latitude: randomNumber(360, 180),
+    longitude: randomNumber(180, 90),
+    capacity: randomNumber(200)
 })
 
 export const randomProductType = () => ({
-    id: randomString(),
+    id: randomId(),
     name: randomString()
 })
 
 export const randomProduct = (type) => ({
-    id: Math.ceil(Math.random() * (5000)).toString(),
+    id: randomId(),
     name: randomString(),
-    weight: Math.ceil(Math.random() * 19),
-    type: (type != null ? type.id : randomString())
+    weight: randomNumber(19),
+    type: (type != null ? type.id : randomId())
 })
 
 describe('test utils', () => {
