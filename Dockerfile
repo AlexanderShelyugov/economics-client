@@ -1,7 +1,7 @@
 FROM node:12.16.2-alpine3.9 AS build
 WORKDIR /app
 COPY package.json ./
-RUN yarn
+RUN yarn install --production
 COPY client.conf ./
 COPY ./public ./public
 COPY ./src ./src
