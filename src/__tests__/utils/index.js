@@ -8,6 +8,18 @@ export const randomWarehouse = () => ({
     capacity: Math.ceil(Math.random() * 200)
 })
 
+export const randomProductType = () => ({
+    id: randomString(),
+    name: randomString()
+})
+
+export const randomProduct = (type) => ({
+    id: Math.ceil(Math.random() * (5000)).toString(),
+    name: randomString(),
+    weight: Math.ceil(Math.random() * 19),
+    type: (type != null ? type.id : randomString())
+})
+
 describe('test utils', () => {
     it('works', () => { })
 })

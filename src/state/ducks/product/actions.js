@@ -22,12 +22,12 @@ const errorOnReceiveProducts = (error) => ({
 })
 
 function shouldFetchProducts(state) {
-    if (_.isEmpty(state.product.entities.byId)) {
+    if (_.isEmpty(_.get(state, 'product.entities.byId'))) {
         return true
-    } else if (state.product.meta.isFetching) {
+    } else if (_.get(state, 'product.meta.isFetching')) {
         return false
     } else {
-        return state.product.meta.invalidating
+        return _.get(state, 'product.meta.invalidating')
     }
 }
 
