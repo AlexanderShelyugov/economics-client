@@ -22,12 +22,12 @@ const errorOnReceiveWarehouses = (error) => ({
 })
 
 function shouldFetchWarehouses(state) {
-    if (_.isEmpty(state.warehouse.entities.byId)) {
+    if (_.isEmpty(_.get(state, 'warehouse.entities.byId'))) {
         return true
-    } else if (state.warehouse.meta.isFetching) {
+    } else if (_.get(state, 'warehouse.meta.isFetching')) {
         return false
     } else {
-        return state.warehouse.meta.invalidating
+        return _.get(state, 'warehouse.meta.invalidating')
     }
 }
 
