@@ -37,24 +37,26 @@ class WarehousesTableComponent extends Component {
                     </TableHead>
                     <TableBody>
                         {
-                            _.map(value, (w) => {
-                                const id = w.id
-                                const onClick = (e) => {
-                                    e.preventDefault()
-                                    this.handleClick(id)
-                                }
-                                return (
-                                    <TableRow key={id}
-                                        hover
-                                        selected={selectedId === id}
-                                    >
-                                        <TableCell onClick={onClick}>{w.name}</TableCell>
-                                        <TableCell onClick={onClick}>{w.latitude}</TableCell>
-                                        <TableCell onClick={onClick}>{w.longitude}</TableCell>
-                                        <TableCell onClick={onClick}>{w.capacity}</TableCell>
-                                    </TableRow>
-                                )
-                            })
+                            !value
+                                ? null
+                                : _.map(value, (w) => {
+                                    const id = w.id
+                                    const onClick = (e) => {
+                                        e.preventDefault()
+                                        this.handleClick(id)
+                                    }
+                                    return (
+                                        <TableRow key={id}
+                                            hover
+                                            selected={selectedId === id}
+                                        >
+                                            <TableCell onClick={onClick}>{w.name}</TableCell>
+                                            <TableCell onClick={onClick}>{w.latitude}</TableCell>
+                                            <TableCell onClick={onClick}>{w.longitude}</TableCell>
+                                            <TableCell onClick={onClick}>{w.capacity}</TableCell>
+                                        </TableRow>
+                                    )
+                                })
                         }
                     </TableBody>
                 </Table>
@@ -66,7 +68,7 @@ class WarehousesTableComponent extends Component {
 WarehousesTableComponent.propTypes = {
     value: PropTypes.objectOf(
         warehouseShape.isRequired
-    ).isRequired,
+    ),
     onWarehouseClick: PropTypes.func
 }
 
