@@ -5,16 +5,10 @@ import thunk from 'redux-thunk'
 import * as actions from '../../../../state/ducks/warehouse/actions'
 import * as types from '../../../../state/ducks/warehouse/types'
 
+import { randomWarehouse } from '../../../utils'
+
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
-
-const randomWarehouse = () => ({
-    id: Math.ceil(Math.random() * (5000)).toString(),
-    name: Math.random().toString(36).substring(7),
-    latitude: Math.ceil(Math.random() * 360 - 180),
-    longitude: Math.ceil(Math.random() * 180 - 90),
-    capacity: Math.ceil(Math.random() * 200)
-})
 
 describe('Warehouse actions', () => {
     afterEach(() => {

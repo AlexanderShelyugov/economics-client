@@ -2,15 +2,9 @@ import React from "react"
 import { render, unmountComponentAtNode } from "react-dom"
 import { act } from "react-dom/test-utils"
 
-import WarehousesTableComponent from '../../../../src/view/components/WarehousesTable'
+import WarehousesTableComponent from '../../../view/components/WarehousesTable'
 
-const randomWarehouse = () => ({
-    id: Math.ceil(Math.random() * (5000)).toString(),
-    name: Math.random().toString(36).substring(7),
-    latitude: Math.ceil(Math.random() * 360 - 180),
-    longitude: Math.ceil(Math.random() * 180 - 90),
-    capacity: Math.ceil(Math.random() * 200)
-})
+import { randomWarehouse } from '../../utils'
 
 const randomWarehouses = () => {
     const warehouses = {}

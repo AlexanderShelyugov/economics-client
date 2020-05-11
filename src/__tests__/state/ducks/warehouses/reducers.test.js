@@ -1,6 +1,8 @@
 import reducer from '../../../../state/ducks/warehouse/reducers'
 import * as types from '../../../../state/ducks/warehouse/types'
 
+import { randomString, randomWarehouse } from '../../../utils'
+
 const initialState = {
     entities: {
         allIds: [],
@@ -12,14 +14,6 @@ const initialState = {
         message: null
     }
 }
-
-const randomWarehouse = () => ({
-    id: Math.ceil(Math.random() * (5000)).toString(),
-    name: Math.random().toString(36).substring(7),
-    latitude: Math.ceil(Math.random() * 360 - 180),
-    longitude: Math.ceil(Math.random() * 180 - 90),
-    capacity: Math.ceil(Math.random() * 200)
-})
 
 describe('Warehouse reducers', () => {
     it('works with initial state', () => {
@@ -54,7 +48,7 @@ describe('Warehouse reducers', () => {
     })
 
     it('handles receive error', () => {
-        const message = Math.random().toString(36).substring(7)
+        const message = randomString()
         expect(reducer(initialState, { type: types.RECEIVE_ERROR, message }).meta.message).toStrictEqual(message)
     })
 })
