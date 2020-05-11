@@ -1,5 +1,6 @@
 build/
 node_modules/
+src/__tests__/
 .env.local
 .gitignore
 build.sh
