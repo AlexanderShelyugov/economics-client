@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import { warehousesUrl } from '../../config'
+import { serverUrl } from '../../config'
 import * as types from './types'
 
 export const invalidateWarehouses = () => ({
@@ -34,7 +34,7 @@ function shouldFetchWarehouses(state) {
 function fetchWarehouses() {
     return dispatch => {
         dispatch(requestWarehouses())
-        return fetch(warehousesUrl + '/warehouses')
+        return fetch(serverUrl + '/warehouses')
             .then(response => response.json())
             .then(
                 json => dispatch(receiveWarehouses(json)),
