@@ -1,11 +1,12 @@
 import _ from 'lodash'
 import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow
+    TableCell, TableRow
 } from '@material-ui/core'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { warehouseShape } from '../propTypes'
+import PageableTable from './PageableTable'
 
 class WarehousesTableComponent extends Component {
     constructor(props) {
@@ -24,43 +25,49 @@ class WarehousesTableComponent extends Component {
         const { value } = this.props
         const { selectedId } = this.state
 
-        return (
-            <TableContainer>
-                <Table stickyHeader aria-label="Warehouses">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Latitude</TableCell>
-                            <TableCell>Longitude</TableCell>
-                            <TableCell>Capacity</TableCell>
+        const count = () => _.keys(value).length
+        const headerMapper = () => (
+            <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Latitude</TableCell>
+                <TableCell>Longitude</TableCell>
+                <TableCell>Capacity</TableCell>
+            </TableRow>
+        )
+        const valuesMapper = (page, rowsPerPage) => {
+            if (value == null) {
+                return null
+            }
+            return _.values(value)
+                .sort((warehouseA, warehouseB) => warehouseA.name.localeCompare(warehouseB.name))
+                .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                .map((w) => {
+                    const id = w.id
+                    const onClick = (e) => {
+                        e.preventDefault()
+                        this.handleClick(id)
+                    }
+                    return (
+                        <TableRow key={id}
+                            hover
+                            selected={selectedId === id}
+                        >
+                            <TableCell onClick={onClick}>{w.name}</TableCell>
+                            <TableCell onClick={onClick}>{w.latitude}</TableCell>
+                            <TableCell onClick={onClick}>{w.longitude}</TableCell>
+                            <TableCell onClick={onClick}>{w.capacity}</TableCell>
                         </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            !value
-                                ? null
-                                : _.map(value, (w) => {
-                                    const id = w.id
-                                    const onClick = (e) => {
-                                        e.preventDefault()
-                                        this.handleClick(id)
-                                    }
-                                    return (
-                                        <TableRow key={id}
-                                            hover
-                                            selected={selectedId === id}
-                                        >
-                                            <TableCell onClick={onClick}>{w.name}</TableCell>
-                                            <TableCell onClick={onClick}>{w.latitude}</TableCell>
-                                            <TableCell onClick={onClick}>{w.longitude}</TableCell>
-                                            <TableCell onClick={onClick}>{w.capacity}</TableCell>
-                                        </TableRow>
-                                    )
-                                })
-                        }
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                    )
+                })
+        }
+
+        return (
+            <PageableTable
+                colspan={4}
+                count={count}
+                headerMapper={headerMapper}
+                valuesMapper={valuesMapper}
+            />
         )
     }
 }
