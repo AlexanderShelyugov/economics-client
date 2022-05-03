@@ -10,7 +10,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import React from 'react'
 import {
     BrowserRouter as Router,
-    Switch,
+    Routes,
     Route,
     Link
 } from "react-router-dom"
@@ -131,7 +131,7 @@ export default function EconomicsMainPage() {
                 </aside>
 
                 <main>
-                    <Switch>
+                    <Routes>
                         <Route path="/warehouses">
                             <WarehousesPage />
                         </Route>
@@ -139,7 +139,7 @@ export default function EconomicsMainPage() {
                             <ProductsPage />
                         </Route>
                         <Route path="/"></Route>
-                    </Switch>
+                    </Routes>
                 </main>
             </div>
         </Router>
